@@ -1,0 +1,23 @@
+{
+	"name": "1-click",
+	"version": "1.0",
+	"description": "1-click to full PDF",
+	"manifest_version": 2,
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"permissions": ["storage", "declarativeContent", "activeTab"],
+	"page_action": {
+		"default_popup": "popup_html"
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://www.sciencedirect.com/user/login*",
+				"https://www.sciencedirect.com/science*",
+				"https://shib-idp.ucl.ac.uk/*"
+			],
+			"js": ["content.js"]
+		}
+	]
+}
