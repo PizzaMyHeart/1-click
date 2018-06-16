@@ -15,9 +15,10 @@
 		{
 			"matches": ["https://www.sciencedirect.com/user/login*",
 				"https://www.sciencedirect.com/science*",
-				"https://shib-idp.ucl.ac.uk/*"
+				"https://shib-idp.ucl.ac.uk/*",
+				"https://onlinelibrary.wiley.com/doi/*"
 			],
-			"js": ["content.js", "sdirect.js"]
+			"js": ["content.js", "sdirect.js", "wiley.js"]
 		}
 	]
 }
