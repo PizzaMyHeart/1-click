@@ -1,5 +1,14 @@
 window.onload = function() {
-  alert("hello");
+  if (window.location.href.indexOf('https://www.sciencedirect.com/science/article/pii/') > -1 ) {
+    fullpdf();
+  }
+}
+
+
+
+/*
+window.onload = function() {
+  //alert("hello");
   if (document.contains(document.querySelector('[title="Other institution login"]'))) {
     document.querySelector('[title="Other institution login"]').click()
   } 
@@ -13,3 +22,4 @@ window.onload = function() {
     document.getElementByName("_eventId_proceed").click();
   }
 }
+*/

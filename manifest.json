@@ -17,7 +17,7 @@
 				"https://www.sciencedirect.com/science*",
 				"https://shib-idp.ucl.ac.uk/*"
 			],
-			"js": ["content.js"]
+			"js": ["content.js", "sdirect.js"]
 		}
 	]
 }
