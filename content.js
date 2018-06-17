@@ -5,7 +5,10 @@ window.onload = function() {
     wiley();
   } else if (window.location.href.indexOf('https://www.nature.com/articles/') > -1) {
     nature();
+  } else if (window.location.href.indexOf('https://link.springer.com/article/') > -1) {
+    springer();
   }
+
 }
 
 

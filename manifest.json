@@ -17,9 +17,10 @@
 				"https://www.sciencedirect.com/science*",
 				"https://shib-idp.ucl.ac.uk/*",
 				"https://onlinelibrary.wiley.com/doi/*",
-				"https://www.nature.com/articles/*"
+				"https://www.nature.com/articles/*",
+				"https://link.springer.com/article/*"
 			],
-			"js": ["content.js", "sdirect.js", "wiley.js", "nature.js"]
+			"js": ["content.js", "sdirect.js", "wiley.js", "nature.js", "springer.js"]
 		}
 	]
 }
