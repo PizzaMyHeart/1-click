@@ -42,6 +42,11 @@ var urls = {
     'base': 'journals.sagepub.com',
     'query': 'http://iam.atypon.com/action/ssostart?idp=https%3A%2F%2Fshib-idp.ucl.ac.uk%2Fshibboleth&redirectUri=%2Fdoi%2Ffull%2F',
     'selector': '.publicationContentTitle'
+  },
+  'ieee': {
+    'base': 'ieeexplore.ieee.org',
+    'query': 'https://ieeexplore.ieee.org/servlet/wayf.jsp?entityId=https://shib-idp.ucl.ac.uk/shibboleth&url=https%3A%2F%2Fieeexplore.ieee.org%2Fdocument%2F',
+    'selector': '.document-banner'
   }                                
 };
 /*
@@ -99,9 +104,16 @@ window.onload = function() {
           redirect = urls[i]['query'] + encodeURIComponent(resource) + '&targetSP=https%3A%2F%2Fjournals.sagepub.com';
           break;
         case 'nature':
+          resource = segments[segments.length - 1];
+          redirect = urls[i]['query'] + encodeURIComponent(resource);
+          break;
         case 'springer':
           resource = segments[segments.length - 1];
-          redirect = urls[i]['query'] + encodeURIComponent(resource)
+          redirect = urls[i]['query'] + encodeURIComponent(resource);
+          break;
+        case 'ieee':
+          resource = segments[segments.length - 2];
+          redirect = urls[i]['query'] + encodeURIComponent(resource);
           break;
         case 'uptodate':
           redirect = urls[i]['query'];

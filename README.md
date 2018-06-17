@@ -1,4 +1,6 @@
 # 1-click
+Institutional login via OpenAthens is not currently supported.
+
 
 # Supported journals and databases
 * Nature 
@@ -9,4 +11,5 @@
 * Wiley 
 * Taylor & Francis Online
 * SAGE Journals
+* IEEE Xplore
 

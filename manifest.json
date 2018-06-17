@@ -23,7 +23,8 @@
 				"https://www.uptodate.com/*",
 				"*://*.bmj.com/*",
 				"https://www.tandfonline.com/*",
-				"*://journals.sagepub.com/*"
+				"*://journals.sagepub.com/*",
+				"https://ieeexplore.ieee.org/*"
 			],
 			"js": ["content.js"],
 			"css": ["style.css"]
