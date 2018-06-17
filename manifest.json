@@ -21,9 +21,11 @@
 				"https://www.nature.com/articles/*",
 				"https://link.springer.com/article/*",
 				"https://www.uptodate.com/*",
-				"*://*.bmj.com/*"
+				"*://*.bmj.com/*",
+				"https://www.tandfonline.com/*"
 			],
-			"js": ["content.js"]
+			"js": ["content.js"],
+			"css": ["style.css"]
 		}
 	]
 }

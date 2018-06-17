@@ -16,7 +16,7 @@ var urls = {
   'nature': {
     'base': 'https://www.nature.com/articles/',
     'query': 'http://idp-saml-nature-federated-login.live.cf.public.nature.com/saml/login?idp=https://shib-idp.ucl.ac.uk/shibboleth&targetUrl=http%3A%2F%2Fwww.nature.com%2Farticles%2F',
-    'selector': '.header-logo-container'
+    'selector': '.ie11-list-hack'
   },
   'springer': {
     'base': 'https://link.springer.com/article/',
@@ -32,6 +32,11 @@ var urls = {
     'base': 'bmj.com/',
     'query': 'https://shibboleth.highwire.org/session/init?entityID=https://shib-idp.ucl.ac.uk/shibboleth&subcode=bmjjournals&env=prod&hw-shib-return-uri=',
     'selector': '.menu'
+  },
+  'tandf': {
+    'base': '',
+    'query': 'https://www.tandfonline.com/action/ssostart?idp=https%3A%2F%2Fshib-idp.ucl.ac.uk%2Fshibboleth&redirectUri=%2Fdoi%2Ffull%2F',
+    'selector': '.toc-heading'
   }                                 
 };
 /*
@@ -73,7 +78,7 @@ window.onload = function() {
   var resource = window.location.href;
   var segments = encodeURIComponent(resource).split('%2F');
   for (var i in urls) {
-    if (resource.indexOf(urls[i]['base']) > -1) {
+    if (resource.indexOf(urls[i]['base']) > -1) {       // if url contains ...
       console.log(urls[i]);
       console.log(urls[i]['selector']);
       var redirect = urls[i]['query'] + encodeURIComponent(resource);
@@ -82,17 +87,22 @@ window.onload = function() {
           break;
         case 'wiley':
           resource = segments[segments.length - 2] + '%2F' + segments[segments.length - 1];
-          redirect += '&targetSP=https%3A%2F%2Fonlinelibrary.wiley.com';
+          redirect = urls[i]['query'] + encodeURIComponent(resource) + '&targetSP=https%3A%2F%2Fonlinelibrary.wiley.com';;
           break;
         case 'nature':
         case 'springer':
           resource = segments[segments.length - 1];
+          redirect = urls[i]['query'] + encodeURIComponent(resource)
           break;
         case 'uptodate':
           redirect = urls[i]['query'];
           break;
         case 'bmj':
           redirect = urls[i]['query'] + 'http://' + resource.split('/')[2] + '/';
+          break;
+        case 'tandf':
+          resource = segments[segments.length - 2] + '%2F' + segments[segments.length - 1];
+          redirect = urls[i]['query'] + resource + '%3FinstName%3DUCL%2B%2528University%2BCollege%2BLondon%2529';
           break;
         }
         var btn = document.createElement('BUTTON');
