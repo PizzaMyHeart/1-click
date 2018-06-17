@@ -8,4 +8,5 @@
 * BMJ Journals
 * Wiley 
 * Taylor & Francis Online
+* SAGE Journals
 

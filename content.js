@@ -34,10 +34,15 @@ var urls = {
     'selector': '.menu'
   },
   'tandf': {
-    'base': '',
+    'base': 'https://www.tandfonline.com',
     'query': 'https://www.tandfonline.com/action/ssostart?idp=https%3A%2F%2Fshib-idp.ucl.ac.uk%2Fshibboleth&redirectUri=%2Fdoi%2Ffull%2F',
     'selector': '.toc-heading'
-  }                                 
+  },
+  'sage': {
+    'base': 'journals.sagepub.com',
+    'query': 'http://iam.atypon.com/action/ssostart?idp=https%3A%2F%2Fshib-idp.ucl.ac.uk%2Fshibboleth&redirectUri=%2Fdoi%2Ffull%2F',
+    'selector': '.publicationContentTitle'
+  }                                
 };
 /*
 window.onload = function() {
@@ -87,7 +92,11 @@ window.onload = function() {
           break;
         case 'wiley':
           resource = segments[segments.length - 2] + '%2F' + segments[segments.length - 1];
-          redirect = urls[i]['query'] + encodeURIComponent(resource) + '&targetSP=https%3A%2F%2Fonlinelibrary.wiley.com';;
+          redirect = urls[i]['query'] + encodeURIComponent(resource) + '&targetSP=https%3A%2F%2Fonlinelibrary.wiley.com';
+          break;
+        case 'sage':
+          resource = segments[segments.length - 2] + '%2F' + segments[segments.length - 1];
+          redirect = urls[i]['query'] + encodeURIComponent(resource) + '&targetSP=https%3A%2F%2Fjournals.sagepub.com';
           break;
         case 'nature':
         case 'springer':

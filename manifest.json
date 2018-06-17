@@ -22,7 +22,8 @@
 				"https://link.springer.com/article/*",
 				"https://www.uptodate.com/*",
 				"*://*.bmj.com/*",
-				"https://www.tandfonline.com/*"
+				"https://www.tandfonline.com/*",
+				"*://journals.sagepub.com/*"
 			],
 			"js": ["content.js"],
 			"css": ["style.css"]
