@@ -1,7 +1,8 @@
 {
 	"name": "1-click",
 	"version": "1.0",
-	"description": "1-click to full PDF",
+	"description": "1-click access to institutional login page for full article",
+	"author": "Ian Tan",
 	"manifest_version": 2,
 	"background": {
 		"scripts": ["background.js"],
