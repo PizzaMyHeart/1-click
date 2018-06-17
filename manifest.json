@@ -19,9 +19,11 @@
 				"https://shib-idp.ucl.ac.uk/*",
 				"https://onlinelibrary.wiley.com/doi/*",
 				"https://www.nature.com/articles/*",
-				"https://link.springer.com/article/*"
+				"https://link.springer.com/article/*",
+				"https://www.uptodate.com/*",
+				"*://*.bmj.com/*"
 			],
-			"js": ["content.js", "sdirect.js", "wiley.js", "nature.js", "springer.js"]
+			"js": ["content.js"]
 		}
 	]
 }

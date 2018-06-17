@@ -16,37 +16,50 @@ var urls = {
   'nature': {
     'base': 'https://www.nature.com/articles/',
     'query': 'http://idp-saml-nature-federated-login.live.cf.public.nature.com/saml/login?idp=https://shib-idp.ucl.ac.uk/shibboleth&targetUrl=http%3A%2F%2Fwww.nature.com%2Farticles%2F',
-    'segment': 4,
     'selector': '.header-logo-container'
   },
   'springer': {
     'base': 'https://link.springer.com/article/',
     'query': 'https://fsso.springer.com/saml/login?idp=https%3A%2F%2Fshib-idp.ucl.ac.uk%2Fshibboleth&targetUrl=https%3A%2F%2Flink.springer.com%2Farticle%2F10.1007%2F',
-    'segment': 5,
     'selector': '.MainTitleSection'   
+  },
+  'uptodate': {
+    'base': 'https://www.uptodate.com/',
+    'query': 'https://www-uptodate-com.libproxy.ucl.ac.uk/contents/search',
+    'selector': '.wk-navbar-container'
+  },
+  'bmj': {
+    'base': 'bmj.com/',
+    'query': 'https://shibboleth.highwire.org/session/init?entityID=https://shib-idp.ucl.ac.uk/shibboleth&subcode=bmjjournals&env=prod&hw-shib-return-uri=',
+    'selector': '.menu'
   }                                 
 };
-
+/*
 window.onload = function() {
-  var resource = encodeURIComponent(window.location.href);
+  var resource = window.location.href;
   for (var i in urls) {
     if (window.location.href.indexOf(urls[i]['base']) > -1) {   // if url contains '...'
       console.log(urls[i]);
       console.log(urls[i]['selector']);
       if (i == 'sdirect') {  
-        redirect = urls[i]['query'] + resource;                 
+        redirect = urls[i]['query'] + encodeURIComponent(resource);                 
       } else {
-        var segments = resource.split('%2F');
+        var segments = encodeURIComponent(resource).split('%2F');
         if (i == 'wiley') {
           resource = segments[segments.length - 2] + '%2F' + segments[segments.length - 1];
-          redirect = urls[i]['query'] + resource + '&targetSP=https%3A%2F%2Fonlinelibrary.wiley.com';
+          redirect = urls[i]['query'] + encodeURIComponent(resource) + '&targetSP=https%3A%2F%2Fonlinelibrary.wiley.com';
         } else if (i == 'nature' || i == 'springer') {
           resource = segments[segments.length - 1];
-          redirect = urls[i]['query'] + resource;
+          redirect = urls[i]['query'] + encodeURIComponent(resource);
+          } else if (i == 'uptodate') {
+            redirect = urls[i]['query'];
+          } else if (i == 'bmj') {
+            
           }
         }
       var btn = document.createElement('BUTTON');
-      var btnText = document.createTextNode('Full version');
+      btn.classList.add('button');
+      var btnText = document.createTextNode('1-CLICK');
       btn.appendChild(btnText);
       document.querySelector(urls[i]['selector']).appendChild(btn);
       btn.onclick = function() {
@@ -55,7 +68,44 @@ window.onload = function() {
     }
   } 
 }
-
+*/
+window.onload = function() {
+  var resource = window.location.href;
+  var segments = encodeURIComponent(resource).split('%2F');
+  for (var i in urls) {
+    if (resource.indexOf(urls[i]['base']) > -1) {
+      console.log(urls[i]);
+      console.log(urls[i]['selector']);
+      var redirect = urls[i]['query'] + encodeURIComponent(resource);
+      switch(i) {
+        case 'sdirect': 
+          break;
+        case 'wiley':
+          resource = segments[segments.length - 2] + '%2F' + segments[segments.length - 1];
+          redirect += '&targetSP=https%3A%2F%2Fonlinelibrary.wiley.com';
+          break;
+        case 'nature':
+        case 'springer':
+          resource = segments[segments.length - 1];
+          break;
+        case 'uptodate':
+          redirect = urls[i]['query'];
+          break;
+        case 'bmj':
+          redirect = urls[i]['query'] + 'http://' + resource.split('/')[2] + '/';
+          break;
+        }
+        var btn = document.createElement('BUTTON');
+        btn.classList.add('button');
+        var btnText = document.createTextNode('1-CLICK');
+        btn.appendChild(btnText);
+        document.querySelector(urls[i]['selector']).appendChild(btn);
+        btn.onclick = function() {
+          window.location.href = redirect;
+        } 
+    }
+  }
+}
 
 
 
