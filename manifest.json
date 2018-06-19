@@ -5,12 +5,12 @@
 	"author": "Ian Tan",
 	"manifest_version": 2,
 	"background": {
-		"scripts": ["background.js"],
+		"scripts": ["popup.js"],
 		"persistent": false
 	},
-	"permissions": ["storage", "declarativeContent", "activeTab"],
-	"page_action": {
-		"default_popup": "popup_html"
+	"permissions": ["storage", "declarativeContent", "activeTab", "tabs"],
+	"browser_action": {
+		"default_popup": "popup.html"
 	},
 	"content_scripts": [
 		{
@@ -24,10 +24,15 @@
 				"*://*.bmj.com/*",
 				"https://www.tandfonline.com/*",
 				"*://journals.sagepub.com/*",
-				"https://ieeexplore.ieee.org/*"
+				"https://ieeexplore.ieee.org/*",
+				"https://academic.oup.com/*",
+				"https://insights.ovid.com/*",
+				"https://www.ncbi.nlm.nih.gov/pubmed/*",
+				"*://dx.doi.org/*"
 			],
 			"js": ["content.js"],
-			"css": ["style.css"]
+			"css": ["style.css"],
+			"run_at": "document_end"
 		}
 	]
 }
