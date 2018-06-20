@@ -11,6 +11,7 @@ This project was borne out of a long-standing frustration over how long it takes
 
 ## Supported journals and databases
 * PubMed
+* Ovid
 * Nature 
 * Springer
 * ScienceDirect
@@ -20,7 +21,9 @@ This project was borne out of a long-standing frustration over how long it takes
 * Taylor & Francis Online
 * SAGE Journals
 * IEEE Xplore
-* OUP
+* Oxford University Press
+* Cambridge University Press
+* de Gruyter
 
 
 ## License

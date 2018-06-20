@@ -10,8 +10,10 @@ window.onload = function() {
                   .href;   
     if (resource.indexOf('elsevier') > -1) {  // if button links to Elsevier linkinghub
       get_proxy(pm_els);
-    }; {get_proxy(pubmed);}
-  }; { // if not PubMed i.e. journal website in urls
+    } else {
+      get_proxy(pubmed);
+    }
+  } else { // if not PubMed i.e. journal website in urls
     get_proxy(not_pubmed);
   };
 }
@@ -19,6 +21,8 @@ window.onload = function() {
 
 function pubmed() {
   console.log("pubmed.js started"); 
+  var resource = document.querySelector('#EntrezForm > div:nth-child(1) > div.supplemental.col.three_col.last > div > div.icons.portlet > a')
+                 .href;   
   console.log("Button links to " + resource);
   for (var i in urls) {
     if (resource.indexOf(urls[i]['base']) > -1) {       // if url contains ...
@@ -2027,5 +2031,24 @@ var urls = {
   },
   'elsevier': {
     'base': 'elsevier.com'
+  },
+  'plos': { // For Chrome Web Store screenshot
+    'base': 'plos.org'
+  },
+  'mit': {
+    'base': 'mitpressjournals.org',
+    'selector': '#pb-page-content > div > div.fix-width > div > div > div > div > div.journalHome > div > div > div > div > div.col-xs-11-24.publicationPagesCol2 > div > div:nth-child(1) > div > div:nth-child(3) > div.res-publication-content > div > div.ecommAbs.ja > article > div > ul'
+  },
+  'cam': {
+    'base': 'cambridge.org/core',
+    'selector': '#Top > div > div.overview.no-margin-bottom > h1'
+  },
+  'deg': {
+    'base': 'degruyter.com',
+    'selector': '.gs-titleheader'
+  },
+  'acs': {
+    'base': 'pubs.acs.org',
+    'selector': '.hlFld-Title'
   }       
 };
