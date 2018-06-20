@@ -1,23 +1,125 @@
 console.log("content.js started"); // check that script has loaded
 var user_inst;
 var proxy;
+var scidir;
+var resource;
 
-window.onload = get_proxy(fullpdf);
+window.onload = function() {  
+  if (window.location.href.indexOf('www.ncbi.nlm.nih.gov/pubmed') > -1) { // if PubMed
+  var resource = document.querySelector('#EntrezForm > div:nth-child(1) > div.supplemental.col.three_col.last > div > div.icons.portlet > a')
+                  .href;   
+    if (resource.indexOf('elsevier') > -1) {  // if button links to Elsevier linkinghub
+      get_proxy(pm_els);
+    }; {get_proxy(pubmed);}
+  }; { // if not PubMed i.e. journal website in urls
+    get_proxy(not_pubmed);
+  };
+}
+
+
+function pubmed() {
+  console.log("pubmed.js started"); 
+  console.log("Button links to " + resource);
+  for (var i in urls) {
+    if (resource.indexOf(urls[i]['base']) > -1) {       // if url contains ...
+      console.log(urls[i]['base']);
+      var redirect = proxy + resource;
+      console.log("The button takes you to: " + redirect);
+      var btn = document.createElement('BUTTON');
+      btn.classList.add('button');
+      var btnText = document.createTextNode('\u26A1 1-CLICK');
+      btn.appendChild(btnText);
+      document.querySelector('.icons').appendChild(btn);
+      console.log("Button appended");
+      btn.onclick = function() {
+       window.open(redirect, 'tab');
+      };
+    };
+  }; 
+}
+
+
+// Pubmed -> Elsevier
+function pm_els() {
+  var resource = document.querySelector('#EntrezForm > div:nth-child(1) > div.supplemental.col.three_col.last > div > div.icons.portlet > a')
+                .href;
+  console.log('pm_els executing');
+  var pii = resource.split('/').pop();
+  console.log('pii: ' + pii);
+  // Get ScienceDirect URL through Elsevier Article Retrieval API
+  var xmlhttp = new XMLHttpRequest();
+  var url = 'https://api.elsevier.com/content/article/pii/' 
+            +  pii
+            + '?httpAccept=application/json';
+  xmlhttp.onload = function() {
+      console.log('Received from Elsevier:' + this.response)
+      var els_response = JSON.parse(this.response);
+      console.log('JSON response: ' + els_response);
+      // get array containing article links
+      var link_arr = els_response['full-text-retrieval-response']['coredata']['link'];
+      console.log(link_arr);
+      for (let i in link_arr) {
+        for (let j in link_arr[i]) {
+          if (link_arr[i][j].indexOf('sciencedirect.com') > -1) {
+            resource = link_arr[i][j];
+            console.log('resource is: ' + resource);
+          };
+        };
+      };
+      redirect = proxy + resource;
+      var btn = document.createElement('BUTTON');
+      btn.classList.add('button');
+      var btnText = document.createTextNode('\u26A1 1-CLICK');
+      btn.appendChild(btnText);
+      document.querySelector('.icons').appendChild(btn);
+      console.log("Button appended");
+      btn.onclick = function() {
+        window.open(redirect, 'tab');
+      };
+  };
+  xmlhttp.open('GET', url, true);
+  xmlhttp.send();
+}
 
 
 
 
-// if user changes institution
+
+
+function not_pubmed() {
+  console.log('not_pubmed executing');
+  var resource = window.location.href;
+  for (var i in urls) {
+    if (resource.indexOf(urls[i]['base']) > -1) {       // if url contains ...
+      console.log(urls[i]['base']);
+      console.log(urls[i]['selector']);
+      var redirect = proxy + resource;
+      console.log("The button takes you to: " + redirect);
+      var insert_here = document.querySelector(urls[i]['selector']),
+                  btn = document.createElement('BUTTON'),
+              btnText = document.createTextNode('\u26A1 1-CLICK');
+      btn.classList.add('button');
+      btn.appendChild(btnText);
+      insert_here.insertBefore(btn, insert_here.firstChild);
+      console.log("Button appended");
+      btn.onclick = function() {
+      window.location.href = redirect;
+      }
+    };
+  };    
+}
+
+// If user changes institution
 chrome.storage.onChanged.addListener(function(changes, area) {
   console.log("Change in storage area: " + area);
   if (area) {
     window.location.reload();
-  }
+  };
 })
 
 
 
-// get proxy
+// Get proxy
 function get_proxy(callback) {
   console.log("get_proxy executing");
   chrome.storage.sync.get('user_inst', function(item) {
@@ -27,64 +129,31 @@ function get_proxy(callback) {
       if (user_inst == proxies[i]['name']) {
         proxy = proxies[i]['url'];
         proxy = proxy.slice(0, -2); // remove the trailing '$@' from the urls 
-      }
-      
-    }
+      } 
+    };
     console.log("Your proxy is: " + proxy);
     if (callback) callback(); 
   });
   console.log("get_proxy executed");  
 }
 
-
-
-function fullpdf() {
-  console.log('fullpdf executing');
-  if (window.location.href.indexOf('www.ncbi.nlm.nih.gov/pubmed') > -1) {
-    pubmed();
-  } else {
-    console.log("not pubmed");
-    var resource = window.location.href;
-    } 
-    for (var i in urls) {
-      if (resource.indexOf(urls[i]['base']) > -1) {       // if url contains ...
-        console.log(urls[i]['base']);
-        console.log(urls[i]['selector']);
-        var redirect = proxy + resource;
-        console.log("The button takes you to: " + redirect);
-        var insert_here = document.querySelector(urls[i]['selector']),
-            btn = document.createElement('BUTTON'),
-            btnText = document.createTextNode('1-CLICK');
-        btn.classList.add('button');
-        btn.appendChild(btnText);
-        insert_here.insertBefore(btn, insert_here.firstChild);
-        console.log("Button appended")
-        btn.onclick = function() {
-          window.location.href = redirect;
-        }
-      }
-    }
-}
-
-
-function pubmed() {
-  console.log("pubmed.js started"); 
-  var resource = document.querySelector('#EntrezForm > div:nth-child(1) > div.supplemental.col.three_col.last > div > div.icons.portlet > a')
-                       .href;
-  console.log(resource);
-  var btn = document.createElement('BUTTON');
-  btn.classList.add('button');
-  var btnText = document.createTextNode('1-CLICK');
-  btn.appendChild(btnText);
-  document.querySelector('.icons').appendChild(btn);
+/*
+function inject_button(proxy, resource) {
+  console.log("inject_button executing");
   var redirect = proxy + resource;
-  console.log('Button links to:' + redirect);
+  console.log("The button takes you to: " + redirect);
+  var insert_here = document.querySelector(urls[i]['selector']),
+              btn = document.createElement('BUTTON'),
+          btnText = document.createTextNode('\u26A1 1-CLICK');
+  btn.classList.add('button');
+  btn.appendChild(btnText);
+  insert_here.insertBefore(btn, insert_here.firstChild);
+  console.log("Button appended")
   btn.onclick = function() {
-          window.open(redirect, 'tab');
-        } 
+    window.location.href = redirect;
+  }
 }
-
-
+*/
 
 
 
@@ -1901,7 +1970,7 @@ var proxies = [
     url: 'http://ezproxy.library.yorku.ca/login?url=$@',
     name: 'York University'
   }
-]
+];
 
 
 var urls = {
@@ -1951,5 +2020,12 @@ var urls = {
   },
   'doi': {
     'base': 'dx.doi.org',
-  }                              
+  },
+  'jama': {
+    'base': 'jamanetwork.com',
+    'selector': '.toolbar'
+  },
+  'elsevier': {
+    'base': 'elsevier.com'
+  }       
 };

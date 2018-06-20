@@ -4,12 +4,46 @@
 	text-align: center;
 	display: inline-block;
 	background-color: white !important;
-	border: 2px solid black;
+	border: 2px solid #555555 !important;
 	font-weight: bold;
+	font-size: 20px !important;
+	margin-left: 10px !important;
+	margin-right: 10px !important;
+	font-family: "Arial Black", Gadget, sans-serif;
 }
 
 .button:hover {
 	color: white !important;
 	background-color: #555555 !important;	
 }
+
+/* popup.html */
+
+
+
+.roboto {
+	font-family: 'Roboto', sans-serif;
+}
+
+#save {
+	margin-top: 10px;
+	background-color: white;
+	border: 2px solid #4CAF50;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 7px 14px;
+	font-family: monospace;
+}
+
+#save:hover {
+	color: white;
+	background-color: #4CAF50;
+}
+
+#status {
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 

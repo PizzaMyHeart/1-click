@@ -8,7 +8,7 @@
 		"scripts": ["popup.js"],
 		"persistent": false
 	},
-	"permissions": ["storage", "declarativeContent", "activeTab", "tabs"],
+	"permissions": ["storage", "declarativeContent", "activeTab", "tabs", "<all_urls>"],
 	"browser_action": {
 		"default_popup": "popup.html"
 	},
@@ -28,7 +28,8 @@
 				"https://academic.oup.com/*",
 				"https://insights.ovid.com/*",
 				"https://www.ncbi.nlm.nih.gov/pubmed/*",
-				"*://dx.doi.org/*"
+				"*://dx.doi.org/*",
+				"https://jamanetwork.com/*"
 			],
 			"js": ["content.js"],
 			"css": ["style.css"],

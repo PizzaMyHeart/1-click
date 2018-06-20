@@ -1,8 +1,16 @@
-# 1-click
-Institutional login via OpenAthens is not currently supported.
+# 1-Click
+> Takes you to full articles of paywalled journals in just a click of a button.
+
+This project was borne out of a long-standing frustration over how long it takes to get to the full version of an online journal article. [Some publishers](https://onlinelibrary.wiley.com/) require you to log in *every single time* you open a new article, even within the same browser session.
 
 
-# Supported journals and databases
+1-Click is a Chrome extension that injects a button into the first page you view upon accessing a paywalled article. Clicking the button takes you directly to your institution's login page; the full article is available after logging in. <sup>Technically it takes two clicks to get to the full article but it's still WAY quicker than slogging through an endless chain of links. Plus 2-clicks doesn't roll off the tongue in quite the same way.</sup>
+
+
+
+
+## Supported journals and databases
+* PubMed
 * Nature 
 * Springer
 * ScienceDirect
@@ -12,29 +20,18 @@ Institutional login via OpenAthens is not currently supported.
 * Taylor & Francis Online
 * SAGE Journals
 * IEEE Xplore
+* OUP
 
 
-# License
+## License
 
 MIT License
 
 Copyright (c) 2018 Ian Tan
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Acknowledgements
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+
+
 
