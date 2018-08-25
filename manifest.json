@@ -1,6 +1,6 @@
 {
 	"name": "1-click",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "1-click access to institutional login page for full article",
 	"icons": {"16": "./assets/tap_16.png",
 			  "64": "./assets/tap_64.png",
