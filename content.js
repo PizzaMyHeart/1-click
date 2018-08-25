@@ -1988,7 +1988,7 @@ var urls = {
   },
   'nature': {
     'base': 'https://www.nature.com/articles/',
-    'selector': '.ie11-list-hack'
+    'selector': '.header-logo-container'
   },
   'springer': {
     'base': 'https://link.springer.com/article/',
